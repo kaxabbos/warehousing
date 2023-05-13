@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Доставка</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body>
+
+<nav th:insert="blocks/nav :: nav"></nav>
+
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center">Доставка</h1>
+            </div>
+        </div>
+        <hr>
+        <div class="row text-center">
+            <div class="col"><span>Товары</span></div>
+            <div class="col-2"><span></span></div>
+        </div>
+        <hr>
+        <div th:each="i : ${products}" class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col-auto text-center">
+                        <img th:src="'/img/' + ${i.img}" style="width: 200px;border-radius: 25px;">
+                    </div>
+                    <div class="col-auto">
+                        <div>
+                            <span>Название:&nbsp;</span>
+                            <span th:text="${i.name}"></span>
+                        </div>
+                        <div>
+                            <span>Склад:&nbsp;</span>
+                            <span th:text="${i.warehouse.name}"></span>
+                        </div>
+                        <div>
+                            <span>Количество:&nbsp;</span>
+                            <span th:text="${i.quantity}"></span>
+                        </div>
+                        <div>
+                            <span>Категория:&nbsp;</span>
+                            <span th:text="${i.category.getName()}"></span>
+                        </div>
+                        <div>
+                            <span>Срок годности:&nbsp;</span>
+                            <span th:text="${i.keep}"></span>
+                        </div>
+                        <div>
+                            <span>Ячейка(и):&nbsp;</span>
+                            <span th:text="${i.cell}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 text-center">
+                <div class="row">
+                    <div class="col mb-2">
+                        <a class="btn btn-primary w-100" th:href="'/deliver/delivered/' + ${i.id}">Доставлено</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bold-and-bright.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Переместить товар</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body>
+
+<nav th:insert="blocks/nav :: nav"></nav>
+
+<section class="py-5">
+    <div class="container py-5">
+        <div th:if="${message}" class="row mb-4 mb-lg-5">
+            <div class="alert col-md-8 col-xl-6 text-center mx-auto alert-warning" role="alert">
+                <strong th:text="${message}"></strong>
+            </div>
+        </div>
+        <div class="row mb-4 mb-lg-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Переместить товар</h2>
+            </div>
+        </div>
+        <form th:action="'/product/move/'+${product.id}" method="post" style="margin-bottom: 10px;"
+              enctype="multipart/form-data">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-md-flex justify-content-md-center align-items-md-center">
+                            <select class="form-select" name="warehouse" required>
+                                <option th:each="warehouse :  ${warehouses}" th:value="${warehouse.id}"
+                                        th:label="${warehouse.getName()}" th:selected="${warehouse.id == product.warehouse.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-md-flex justify-content-md-center align-items-md-center">
+                            <input class="form-control" type="text" name="cell" th:value="${product.cell}" placeholder="Ячейка(и)"
+                                   style="margin: 5px;" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary" type="submit" style="margin: 5px;">Переместить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bold-and-bright.js"></script>
+</body>
+
+</html>
